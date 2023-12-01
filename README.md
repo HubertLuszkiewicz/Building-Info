@@ -13,3 +13,4 @@ Dla administratorów budynków, którzy pragną optymalizować koszty zarządzan
    - heating - poziom zużycia energii ogrzewania (float)
    - light – łączna moc oświetlenia
    
+![example workflow](https://github.com/HubertLuszkiewicz/Building-Info/actions/workflows/main.yml/badge.svg)
