@@ -8,8 +8,8 @@ Dla administratorów budynków, którzy pragną optymalizować koszty zarządzan
    - id – unikalny identyfikator
    - name – opcjonalna nazwa lokalizacji
 * Pomieszczenie dodatkowo jest charakteryzowane przez:
-   - area = powierzchnia w m^2
-   - cube = kubatura pomieszczenia w m^3
+   - area = powierzchnia w m<sup>2</sup>
+   - cube = kubatura pomieszczenia w m<sup>3</sup>
    - heating = poziom zużycia energii ogrzewania (float)
    - light – łączna moc oświetlenia
    
