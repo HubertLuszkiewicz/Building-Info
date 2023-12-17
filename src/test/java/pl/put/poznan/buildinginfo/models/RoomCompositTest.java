@@ -1,4 +1,4 @@
-package java.pl.put.poznan.buildinginfo.models;
+package pl.put.poznan.buildinginfo.models;
 
 import org.junit.jupiter.api.Test;
 import pl.put.poznan.buildinginfo.models.*;

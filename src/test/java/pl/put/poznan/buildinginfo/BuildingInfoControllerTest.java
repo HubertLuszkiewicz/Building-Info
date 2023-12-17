@@ -1,4 +1,4 @@
-package java.pl.put.poznan.buildinginfo;
+package pl.put.poznan.buildinginfo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
