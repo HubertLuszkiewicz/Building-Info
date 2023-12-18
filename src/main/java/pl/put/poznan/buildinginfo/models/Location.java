@@ -9,8 +9,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 )
 @JsonSubTypes({
         @JsonSubTypes.Type(value = Room.class, name = "ROOM"),
-        @JsonSubTypes.Type(value = RoomComponent.class, name = "CONDIGNATION"),
-        @JsonSubTypes.Type(value = RoomComponent.class, name = "BUILDING")
+        @JsonSubTypes.Type(value = RoomComposit.class, name = "CONDIGNATION"),
+        @JsonSubTypes.Type(value = RoomComposit.class, name = "BUILDING")
 })
 
 public abstract class Location {

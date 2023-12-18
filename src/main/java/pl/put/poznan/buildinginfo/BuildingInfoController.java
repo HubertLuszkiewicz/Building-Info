@@ -17,7 +17,7 @@ public class BuildingInfoController {
 
     @GetMapping("/cube")
     public Float getCube(@RequestBody Location body){
-        log.info("For location: " + body.name + " area is: " + body.getArea().toString() + " m^2");
+        log.info("For location: " + body.name + " cube is: " + body.getCube().toString() + " m^3");
         return body.getCube();
     }
 }
