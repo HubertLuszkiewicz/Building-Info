@@ -16,3 +16,17 @@ jobs:
           cache: maven
       - name: Validate, build and run tests
         run: mvn --batch-mode --update-snapshots verify
+      - name: Copy artifact
+        run: mkdir staging && cp target/*.jar staging
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Building-Info
+          path: staging
+      - name: Generate javadoc
+        run: mvn javadoc:javadoc
+      - name: Upload javadoc
+        uses: actions/upload-artifact@v3
+        with:
+          name: javadoc
+          path: target/site/apidocs
