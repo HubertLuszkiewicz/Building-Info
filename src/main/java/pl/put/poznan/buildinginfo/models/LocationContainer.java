@@ -2,9 +2,9 @@ package pl.put.poznan.buildinginfo.models;
 
 import java.util.List;
 
-public class RoomComposit<Sublocation extends Location> extends Location{
+public class LocationContainer<Sublocation extends Location> extends Location{
 
-    public RoomComposit(Integer id, String name, Types type, List<Sublocation> locations) {
+    public LocationContainer(Integer id, String name, Types type, List<Sublocation> locations) {
         super(id, name);
         this.locations = locations;
     }
@@ -27,7 +27,7 @@ public class RoomComposit<Sublocation extends Location> extends Location{
     public Float getArea() { return this.getLocations().stream().map(Sublocation::getArea).reduce(0f, Float::sum); }
 
     @Override
-    public Float getCube() { return this.getLocations().stream().map(Sublocation::getCube).reduce(0f, Float::sum); }
+    public Float getVolume() { return this.getLocations().stream().map(Sublocation::getVolume).reduce(0f, Float::sum); }
 
     @Override
     public Float getTotalHeating() { return this.getLocations().stream().map(Sublocation::getTotalHeating).reduce(0f, Float::sum); }

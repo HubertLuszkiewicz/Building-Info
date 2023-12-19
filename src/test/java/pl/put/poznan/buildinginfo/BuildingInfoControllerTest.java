@@ -3,7 +3,6 @@ package pl.put.poznan.buildinginfo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import pl.put.poznan.buildinginfo.BuildingInfoController;
 import pl.put.poznan.buildinginfo.models.*;
 
 import java.util.List;
@@ -22,9 +21,9 @@ public class BuildingInfoControllerTest {
         Room room2 = new Room(2, "Room2", 10.0f, 0.0f, 0.0f, 0);
         Room room3 = new Room(3, "Room3", 150.0f, 0.0f, 0.0f, 0);
 
-        Condignation condignation = new Condignation(4, "Condignation", Types.CONDIGNATION, List.of(room, room2));
-        Condignation condignation2 = new Condignation(5, "Condignation", Types.CONDIGNATION, List.of(room3));
-        Building building = new Building(6, "Building", Types.BUILDING, List.of(condignation, condignation2));
+        Floor floor = new Floor(4, "Floor", Types.FLOOR, List.of(room, room2));
+        Floor floor2 = new Floor(5, "Floor2", Types.FLOOR, List.of(room3));
+        Building building = new Building(6, "Building", Types.BUILDING, List.of(floor, floor2));
         assertEquals(buildingInfoController.getArea((Location)building), 170.0f);
     }
 }

@@ -2,6 +2,6 @@ package pl.put.poznan.buildinginfo.models;
 
 public enum Types {
     ROOM,
-    CONDIGNATION,
+    FLOOR,
     BUILDING
 }

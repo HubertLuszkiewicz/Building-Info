@@ -19,10 +19,10 @@ public class BuildingInfoController {
         return body.getArea();
     }
 
-    @GetMapping("/cube")
-    public Float getCube(@RequestBody Location body){
-        log.info("For location: " + body.name + " cube is: " + body.getCube().toString() + " m^3");
-        return body.getCube();
+    @GetMapping("/volume")
+    public Float getVolume(@RequestBody Location body){
+        log.info("For location: " + body.name + " volume is: " + body.getVolume().toString() + " m^3");
+        return body.getVolume();
     }
 
     @GetMapping("/lighting")
@@ -37,7 +37,7 @@ public class BuildingInfoController {
     @GetMapping("/heating")
     public Float getHeatingPerVolume(@RequestBody Location body) {
         Float heating = body.getTotalHeating();
-        Float volume = body.getCube();
+        Float volume = body.getVolume();
         Float out = heating / volume;
         log.info("For location: " + body.name + " heating per m^3 is: " + heating + "/" + volume + "=" + out);
         return out;
@@ -47,9 +47,9 @@ public class BuildingInfoController {
     public List<Integer> getOverheatedRooms(@RequestBody Building building, @RequestParam("threshold") Float threshold) {
         List<Integer> out = new ArrayList<Integer>();
 
-        for (Condignation condignation : building.getLocations()) {
-            for (Room room : condignation.getLocations()) {
-                float val = room.getTotalHeating() / room.getCube();
+        for (Floor floor : building.getLocations()) {
+            for (Room room : floor.getLocations()) {
+                float val = room.getTotalHeating() / room.getVolume();
                 if (val >= threshold) {
                     log.info("Location: " + room.name + " (" + room.id + ") heating per m^3: " + val + " is above the threshold of " + threshold);
                     out.add(room.id);
