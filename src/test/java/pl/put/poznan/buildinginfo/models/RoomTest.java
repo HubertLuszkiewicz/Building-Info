@@ -16,4 +16,15 @@ public class RoomTest {
         Room room = new Room(1, "Room", 10.0f, 15.0f, 0.0f, 0);
         assertEquals(room.getArea(), 10.0f);
     }
+
+    @Test
+    public void testGetTotalHeating() {
+        Room room = new Room(1, "Room", 10.0f, 15.0f, 15.0f, 0);
+        assertEquals(room.getTotalHeating(), 15.0f);
+    }
+
+    @Test
+    public void testGetTotalLighting() {
+        Room room = new Room(1, "Room", 10.0f, 15.0f, 15.0f, 10.0f);
+        assertEquals(room.getTotalHeating(), 10.0f);
 }
