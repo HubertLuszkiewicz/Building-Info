@@ -10,8 +10,14 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controller class for REST API using Spring
+ */
 @RestController
 public class BuildingInfoController {
+    /*
+     * Logger using
+     */
     final private static Logger log = LoggerFactory.getLogger(BuildingInfoController.class);
     @GetMapping("/area")
     public Float getArea(@RequestBody Location body){
@@ -20,6 +26,9 @@ public class BuildingInfoController {
         return area;
     }
 
+    /*
+     * @return Volume of specified location (included sublocation)
+     */
     @GetMapping("/volume")
     public Float getVolume(@RequestBody Location body){
         Float volume = body.getVolume();
@@ -27,6 +36,9 @@ public class BuildingInfoController {
         return volume;
     }
 
+    /*
+     * @return Mean lighting of specified location (included sublocation)
+     */
     @GetMapping("/lighting")
     public Float getLightingPerArea(@RequestBody Location body) {
         Integer lighting = body.getTotalLighting();
@@ -36,6 +48,9 @@ public class BuildingInfoController {
         return out;
     }
 
+    /*
+     * @return Mean heating of specified location (included sublocation)
+     */
     @GetMapping("/heating")
     public Float getHeatingPerVolume(@RequestBody Location body) {
         Float heating = body.getTotalHeating();
@@ -45,6 +60,9 @@ public class BuildingInfoController {
         return out;
     }
 
+    /*
+     * @return List of overheating rooms in building (by treshold)
+     */
     @GetMapping("/overheating")
     public List<Integer> getOverheatedRooms(@RequestBody Building building, @RequestParam("threshold") Float threshold) {
         List<Integer> out = new ArrayList<Integer>();
@@ -64,6 +82,9 @@ public class BuildingInfoController {
         return out;
     }
     
+    /*
+     * @return The lowest lighting room in building
+     */
     @GetMapping("/lightinglowest")
     public List<String> getLightingLowest(@RequestBody Building building) {
         List<String> out = new ArrayList<String>();
@@ -74,11 +95,13 @@ public class BuildingInfoController {
                 Integer val = room.getTotalLighting();
 
                 if (val < min) {
+                    log.info("Clear");
                     out.clear();
                     min = val;
                 }
 
                 if (val.intValue() == min.intValue()) {
+                    log.info("Location: " + room.name);
                     out.add(room.name);
                 }
             }
