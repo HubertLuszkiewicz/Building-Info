@@ -64,8 +64,8 @@ public class BuildingInfoController {
         return out;
     }
     
-    @GetMapping("/lighting")
-    public List<String> getLighitingCost(@RequestedBody Location body) {
+    @GetMapping("/lightinglowest")
+    public List<String> getLighitingLowest(@RequestedBody Location body) {
         List<String> out = new ArrayList<String>();
         Integer min = Integer.MAXVALUE;
 
