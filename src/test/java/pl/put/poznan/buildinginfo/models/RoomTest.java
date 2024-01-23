@@ -25,6 +25,7 @@ public class RoomTest {
 
     @Test
     public void testGetTotalLighting() {
-        Room room = new Room(1, "Room", 10.0f, 15.0f, 15.0f, 10.0f);
-        assertEquals(room.getTotalLighting(), 10.0f);
+        Room room = new Room(1, "Room", 10.0f, 15.0f, 15.0f, 10);
+        assertEquals(room.getTotalLighting(), 10);
+    }
 }

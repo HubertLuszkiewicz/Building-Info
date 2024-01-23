@@ -65,19 +65,20 @@ public class BuildingInfoController {
     }
     
     @GetMapping("/lightinglowest")
-    public List<String> getLighitingLowest(@RequestedBody Location body) {
+    public List<String> getLightingLowest(@RequestBody Building building) {
         List<String> out = new ArrayList<String>();
-        Integer min = Integer.MAXVALUE;
+        Integer min = Integer.MAX_VALUE;
 
-        for (Floor floor : building.getLocation()) {
-            for (Room room : floor.getLocation()) {
+        for (Floor floor : building.getLocations()) {
+            for (Room room : floor.getLocations()) {
                 Integer val = room.getTotalLighting();
 
                 if (val < min) {
                     out.clear();
                     min = val;
                 }
-                if (val == min) {
+
+                if (val.intValue() == min.intValue()) {
                     out.add(room.name);
                 }
             }

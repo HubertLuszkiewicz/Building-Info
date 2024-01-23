@@ -1,6 +1,7 @@
 package pl.put.poznan.buildinginfo;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import pl.put.poznan.buildinginfo.models.*;
@@ -61,6 +62,7 @@ public class BuildingInfoControllerTest {
         Float res = this.buildingInfoController.getLightingPerArea(fakeLoc);
         verify(fakeLoc).getTotalLighting();
         verify(fakeLoc).getArea();
+        verifyNoMoreInteractions(fakeLoc);
         assertEquals(2.5f, res);
     }
 
@@ -73,6 +75,7 @@ public class BuildingInfoControllerTest {
         Float res = this.buildingInfoController.getHeatingPerVolume(fakeLoc);
         verify(fakeLoc).getTotalHeating();
         verify(fakeLoc).getVolume();
+        verifyNoMoreInteractions(fakeLoc);
         assertEquals(2.5f, res);
     }
 
@@ -101,6 +104,52 @@ public class BuildingInfoControllerTest {
         verify(room1).getVolume();
         verify(room2).getTotalHeating();
         verify(room2).getVolume();
+        verifyNoMoreInteractions(building, floor, room1, room2);
         assertArrayEquals(res.toArray(), new Integer[]{ 2 });
+    }
+
+    @Test
+    public void testGetOverheatedRooms_NoRooms() {
+        Floor floor = mock(Floor.class);
+        when(floor.getLocations()).thenReturn(Collections.emptyList());
+
+        Building building = mock(Building.class);
+        when(building.getLocations()).thenReturn(List.of(floor));
+
+        List<Integer> res = this.buildingInfoController.getOverheatedRooms(building, 3.0f);
+        verify(building).getLocations();
+        verify(floor).getLocations();
+        verifyNoMoreInteractions(building, floor);
+        assertArrayEquals(res.toArray(), new Integer[]{});
+    }
+
+    @Test
+    public void testGetLightingLowest() {
+        Room room1 = mock(Room.class, "1");
+        room1.name = "1";
+        when(room1.getTotalLighting()).thenReturn(5);
+
+        Room room2 = mock(Room.class, "2");
+        room2.name = "2";
+        when(room2.getTotalLighting()).thenReturn(10);
+
+        Room room3 = mock(Room.class, "3");
+        room3.name = "3";
+        when(room3.getTotalLighting()).thenReturn(5);
+
+        Floor floor = mock(Floor.class);
+        when(floor.getLocations()).thenReturn(List.of(room1, room2, room3));
+
+        Building building = mock(Building.class);
+        when(building.getLocations()).thenReturn(List.of(floor));
+
+        List<String> res = this.buildingInfoController.getLightingLowest(building);
+        verify(building).getLocations();
+        verify(floor).getLocations();
+        verify(room1).getTotalLighting();
+        verify(room2).getTotalLighting();
+        verify(room3).getTotalLighting();
+        verifyNoMoreInteractions(building, floor, room1, room2, room3);
+        assertArrayEquals(new String[]{ room1.name, room3.name }, res.toArray());
     }
 }
