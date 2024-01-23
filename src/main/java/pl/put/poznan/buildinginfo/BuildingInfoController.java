@@ -63,4 +63,26 @@ public class BuildingInfoController {
 
         return out;
     }
+    
+    @GetMapping("/lighting")
+    public List<String> getLighitingCost(@RequestedBody Location body) {
+        List<String> out = new ArrayList<String>();
+        Integer min = Integer.MAXVALUE;
+
+        for (Floor floor : building.getLocation()) {
+            for (Room room : floor.getLocation()) {
+                Integer val = room.getTotalLighting();
+
+                if (val < min) {
+                    out.clear();
+                    min = val;
+                }
+                if (val == min) {
+                    out.add(room.name);
+                }
+            }
+        }
+
+        return out;
+    }
 }
