@@ -15,14 +15,16 @@ public class BuildingInfoController {
     final private static Logger log = LoggerFactory.getLogger(BuildingInfoController.class);
     @GetMapping("/area")
     public Float getArea(@RequestBody Location body){
-        log.info("For location: " + body.name + " area is: " + body.getArea().toString() + " m^2");
-        return body.getArea();
+        Float area = body.getArea();
+        log.info("For location: " + body.name + " area is: " + area.toString() + " m^2");
+        return area;
     }
 
     @GetMapping("/volume")
     public Float getVolume(@RequestBody Location body){
-        log.info("For location: " + body.name + " volume is: " + body.getVolume().toString() + " m^3");
-        return body.getVolume();
+        Float volume = body.getVolume();
+        log.info("For location: " + body.name + " volume is: " + volume.toString() + " m^3");
+        return volume;
     }
 
     @GetMapping("/lighting")

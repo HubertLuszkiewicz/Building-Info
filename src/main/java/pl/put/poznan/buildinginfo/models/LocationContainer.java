@@ -21,7 +21,7 @@ public class LocationContainer<Sublocation extends Location> extends Location{
     }
 
     /** Container holding sublocation references */
-    private final List<Sublocation> locations;
+    private List<Sublocation> locations;
 
     /**
      * Add a sublocation to the container
